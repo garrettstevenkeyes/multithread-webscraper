@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
 
@@ -13,6 +14,7 @@ import java.util.Objects;
  */
 public final class ConfigurationLoader {
 
+  // the path for the configuration
   private final Path path;
 
   /**
@@ -29,6 +31,16 @@ public final class ConfigurationLoader {
    */
   public CrawlerConfiguration load() {
     // TODO: Fill in this method.
+
+    // read the JSON string from a file path
+    try (Reader reader = Files.newBufferedReader(path)) {
+      return read(reader);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    // pass the string to the read(Reader reader)
+
+    // return the created CrawlerConfiguration
 
 
 
@@ -59,6 +71,7 @@ public final class ConfigurationLoader {
             .setMaxDepth(builder.getMaxDepth())
             .setTimeoutSeconds(builder.getTimeout().toSecondsPart())
             .setResultPath(builder.getResultPath())
+            .setProfileOutputPath(builder.getProfileOutputPath())
             .build();
   }
 }
