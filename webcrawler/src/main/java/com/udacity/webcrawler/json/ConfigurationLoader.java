@@ -1,8 +1,8 @@
 package com.udacity.webcrawler.json;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -60,18 +60,8 @@ public final class ConfigurationLoader {
     // TODO: Fill in this method
 
     ObjectMapper objectMapper = new ObjectMapper();
-    CrawlerConfiguration builder = objectMapper.readValue(reader, CrawlerConfiguration.class);
+    objectMapper.disable(JsonParser.Feature.AUTO_CLOSE_SOURCE);
 
-    return new CrawlerConfiguration.Builder()
-            .addStartPages(String.valueOf(builder.getStartPages()))
-            .addIgnoredUrls(String.valueOf(builder.getIgnoredUrls()))
-            .addIgnoredWords(String.valueOf(builder.getIgnoredWords()))
-            .setParallelism(builder.getParallelism())
-            .setImplementationOverride(builder.getImplementationOverride())
-            .setMaxDepth(builder.getMaxDepth())
-            .setTimeoutSeconds(builder.getTimeout().toSecondsPart())
-            .setResultPath(builder.getResultPath())
-            .setProfileOutputPath(builder.getProfileOutputPath())
-            .build();
+    return objectMapper.readValue(reader, CrawlerConfiguration.Builder.class).build();
   }
 }

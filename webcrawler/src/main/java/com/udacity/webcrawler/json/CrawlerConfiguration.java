@@ -239,7 +239,7 @@ public final class CrawlerConfiguration {
      *
      * <p>See {@link #getParallelism()}.
      */
-    @JsonProperty("setParallelism")
+    @JsonProperty("parallelism")
     public Builder setParallelism(int parallelism) {
       this.parallelism = parallelism;
       return this;
