@@ -2,6 +2,7 @@ package com.udacity.webcrawler.json;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -30,13 +31,17 @@ public final class CrawlResultWriter {
    *
    * @param path the file path where the crawl result data should be written.
    */
+
   public void write(Path path) {
     // This is here to get rid of the unused variable warning.
     Objects.requireNonNull(path);
-    // TODO: Fill in this method.
+    // Try to write the path to the writer
     try (Writer writer = Files.newBufferedWriter(path)){
+      // write to the writer
       write(writer);
+    // catch any errors that pop up
     } catch (IOException e) {
+      // print the call stack if there is an error
       e.printStackTrace();
     }
   }
@@ -46,18 +51,14 @@ public final class CrawlResultWriter {
    *
    * @param writer the destination where the crawl result data should be written.
    */
-  public void write(Writer writer) {
+  @JsonDeserialize(builder = CrawlResult.Builder.class)
+  public void write(Writer writer) throws IOException{
     // This is here to get rid of the unused variable warning.
     Objects.requireNonNull(writer);
-    // TODO: Fill in this method.
-
+    // Create a new object mapper object
     ObjectMapper objectMapper = new ObjectMapper();
     objectMapper.disable(JsonParser.Feature.AUTO_CLOSE_SOURCE);
 
-    try {
-      objectMapper.writeValue(writer, result);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    objectMapper.writeValue(writer, result);
   }
 }
