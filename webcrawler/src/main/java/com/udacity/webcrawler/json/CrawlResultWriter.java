@@ -63,6 +63,7 @@ public final class CrawlResultWriter {
       objectMapper.writeValue(writer, result);
     } catch (Exception ex) {
       ex.printStackTrace();
+
     }
   }
 }
