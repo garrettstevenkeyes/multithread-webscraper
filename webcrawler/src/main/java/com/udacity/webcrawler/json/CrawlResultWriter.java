@@ -52,13 +52,13 @@ public final class CrawlResultWriter {
    * @param writer the destination where the crawl result data should be written.
    */
   @JsonDeserialize(builder = CrawlResult.Builder.class)
-  public void write(Writer writer) throws IOException{
+  public void write(Writer writer) throws IOException {
     // This is here to get rid of the unused variable warning.
     Objects.requireNonNull(writer);
     // Create a new object mapper object
     ObjectMapper objectMapper = new ObjectMapper();
     objectMapper.disable(JsonParser.Feature.AUTO_CLOSE_SOURCE);
 
-    objectMapper.writeValue(writer, result);
+    objectMapper.writeValue(writer,result);
   }
 }
