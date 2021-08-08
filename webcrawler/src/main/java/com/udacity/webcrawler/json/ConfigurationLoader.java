@@ -37,12 +37,6 @@ public final class ConfigurationLoader {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    // pass the string to the read(Reader reader)
-
-    // return the created CrawlerConfiguration
-
-
-
     return new CrawlerConfiguration.Builder().build();
   }
 
@@ -55,9 +49,7 @@ public final class ConfigurationLoader {
   @JsonDeserialize(builder = CrawlerConfiguration.Builder.class)
   public static CrawlerConfiguration read(Reader reader) throws IOException {
     // This is here to get rid of the unused variable warning.
-     Objects.requireNonNull(reader);
-
-
+    Objects.requireNonNull(reader);
     ObjectMapper objectMapper = new ObjectMapper();
     objectMapper.disable(JsonParser.Feature.AUTO_CLOSE_SOURCE);
 
