@@ -54,6 +54,7 @@ public final class CrawlResult {
     return urlsVisited;
   }
 
+
   /**
    * A package-private builder class for constructing web crawl {@link CrawlResult}s.
    */
