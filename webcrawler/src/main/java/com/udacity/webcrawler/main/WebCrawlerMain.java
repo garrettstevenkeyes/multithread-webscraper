@@ -38,7 +38,7 @@ public final class WebCrawlerMain {
     CrawlResultWriter resultWriter = new CrawlResultWriter(result);
 
     // TODO: Write the crawl results to a JSON file (or System.out if the file name is empty)
-    if (config.getResultPath().isEmpty()){
+    if (this.config.getResultPath().isEmpty()){
       System.out.println("The result path was empty, printing to terminal");
       Writer printedStream = new BufferedWriter(new OutputStreamWriter(System.out));
       resultWriter.write(printedStream);
